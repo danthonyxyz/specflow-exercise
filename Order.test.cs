@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-public class OrderBuilder {
+public class OrderBuilder 
+{
     Dictionary<ItemKind, int> prices = new Dictionary<ItemKind, int>() {
         { ItemKind.STARTER, 400 },
         { ItemKind.MAIN, 700 },
@@ -15,9 +16,6 @@ public class OrderBuilder {
     }
 }
 
-public class TestData {
-    
-}
 public class TestAddItem
 {
     [Theory]
@@ -33,7 +31,8 @@ public class TestAddItem
     }
 
     [Fact]
-    public void AddingItemsSequentially() {
+    public void AddingItemsSequentially() 
+    {
         Order order = new OrderBuilder().Build();
 
         order.AddItem(ItemKind.STARTER, 1);
@@ -47,17 +46,19 @@ public class TestAddItem
     [InlineData(0)]
     [InlineData(-1)]
     [InlineData(-5)]
-    public void AddingInvalidNumberOfItems(int count) {
+    public void AddingInvalidNumberOfItems(int count) 
+    {
         Order order = new OrderBuilder().Build();
 
         Assert.Throws<ArgumentException>(() => order.AddItem(ItemKind.DRINK, count));
     }
 }
 
-public class TestRemoveItem {
-
+public class TestRemoveItem 
+{
     [Fact]
-    public void RemovingItem() {
+    public void RemovingItem() 
+    {
         Order order = new OrderBuilder().Build();
 
         Assert.Equal(0, order.items.Count);
@@ -67,7 +68,8 @@ public class TestRemoveItem {
     }
 
     [Fact]
-    public void RemovingMultiple() {
+    public void RemovingMultiple() 
+    {
         Order order = new OrderBuilder().Build();
 
         order.AddItem(ItemKind.DRINK, 4);
@@ -77,5 +79,20 @@ public class TestRemoveItem {
         order.RemoveItem(ItemKind.MAIN);
         order.RemoveItem(ItemKind.STARTER);
         Assert.Equal(9, order.items.Count);
+    }
+}
+
+public class TestCalculateTotal
+{
+    [Theory]
+    [InlineData(1, 440)]
+    [InlineData(2, 880)]
+    [InlineData(5, 2200)]
+    public void AddServiceCharge(int count, int expectedPrice)
+    {
+        Order order = new OrderBuilder().Build();
+
+        order.AddItem(ItemKind.STARTER, count);
+        Assert.Equal(expectedPrice, order.CalculateTotal());
     }
 }
