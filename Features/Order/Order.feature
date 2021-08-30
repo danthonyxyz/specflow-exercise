@@ -19,3 +19,13 @@ Feature: Calculating the total cost of an order
         And 2 mains are added
         And 2 more mains are added
         Then the total should be £35.20
+
+    Scenario: Cancelling items
+        Given a new order
+        When 4 starters are added
+        And 4 mains are added
+        And 4 drinks are added
+        And a starter is removed
+        And a main is removed
+        And a drink is removed
+        Then the total should be £44.55

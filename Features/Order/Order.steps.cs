@@ -12,6 +12,23 @@ public class OrderSteps
 		this.orderContext = orderContext;
 	}
 
+	ItemKind ParseItemKind(string itemKindString) {
+		ItemKind itemKind;
+
+		switch(itemKindString.ToUpper()) {
+			case "STARTERS": itemKind = ItemKind.STARTER;
+				break;
+			case "MAINS": itemKind = ItemKind.MAIN;
+				break;
+			case "DRINKS": itemKind = ItemKind.DRINK;
+				break;
+			default: Enum.TryParse<ItemKind>(itemKindString, out itemKind);
+				break;
+		}
+
+		return itemKind;
+	}
+
 	[Given(@"a (.*) price of £(.*)")]
 	public void GivenItemPrice(ItemKind itemKind, float price)
 	{
@@ -30,22 +47,16 @@ public class OrderSteps
 	}
 
 	[When(@"([0-9]*)(?: more)? (.*) (?:is|are) added")]
-	public void WhenItemsAdded(int count, string item)
+	public void WhenItemsAdded(int count, string itemKindString)
 	{
-		ItemKind itemKind;
-		
-		switch(item.ToUpper()) {
-			case "STARTERS": itemKind = ItemKind.STARTER; 
-				break;
-			case "MAINS": itemKind = ItemKind.MAIN;
-				break;
-			case "DRINKS": itemKind = ItemKind.DRINK;
-				break;
-			default: Enum.TryParse<ItemKind>(item, out itemKind); 
-				break;
-		}
-
+		ItemKind itemKind = ParseItemKind(itemKindString);
 		orderContext.order.AddItem(itemKind, count);
+	}
+
+	[When(@"a (.*) is removed")]
+	public void WhenItemRemoved(string itemKindString) {
+		ItemKind itemKind = ParseItemKind(itemKindString);
+		orderContext.order.RemoveItem(itemKind);
 	}
 
 	[Then(@"the total should be £(.*)")]
