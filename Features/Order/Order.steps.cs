@@ -22,7 +22,7 @@ public class OrderSteps
 				break;
 			case "DRINKS": itemKind = ItemKind.DRINK;
 				break;
-			default: Enum.TryParse<ItemKind>(itemKindString, out itemKind);
+			default: Enum.TryParse<ItemKind>(itemKindString.ToUpper(), out itemKind);
 				break;
 		}
 

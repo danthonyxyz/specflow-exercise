@@ -26,7 +26,12 @@ public class Order
 
     public void RemoveItem(ItemKind itemKind) 
     {
-
+        foreach (ItemKind item in items) {
+            if (item == itemKind) {
+                items.Remove(item);
+                return;
+            }
+        }
     } 
 
     public int CalculateTotal()
