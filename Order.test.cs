@@ -9,13 +9,14 @@ public class TestAddItem
         { ItemKind.MAIN, 700 },
         { ItemKind.DRINK, 250 }
     };
+    readonly float SERVICE_CHARGE = 0.1f;
 
     [Theory]
     [InlineData(1)]
     [InlineData(5)]
     public void AddingItems(int count)
     {
-        Order order = new Order(PRICES);
+        Order order = new Order(PRICES, SERVICE_CHARGE);
 
         order.AddItem(ItemKind.STARTER, count);
 
@@ -24,7 +25,7 @@ public class TestAddItem
 
     [Fact]
     public void AddingItemsSequentially() {
-        Order order = new Order(PRICES);
+        Order order = new Order(PRICES, SERVICE_CHARGE);
 
         order.AddItem(ItemKind.STARTER, 1);
         order.AddItem(ItemKind.MAIN, 2);
@@ -38,7 +39,7 @@ public class TestAddItem
     [InlineData(-1)]
     [InlineData(-5)]
     public void AddingInvalidNumberOfItems(int count) {
-        Order order = new Order(PRICES);
+        Order order = new Order(PRICES, SERVICE_CHARGE);
 
         Assert.Throws<ArgumentException>(() => order.AddItem(ItemKind.DRINK, count));
     }

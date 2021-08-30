@@ -13,17 +13,25 @@ public class OrderSteps
 	}
 
 	[Given(@"a (.*) price of £(.*)")]
-	public void GivenItemPrice(ItemKind itemKind, float price) {
+	public void GivenItemPrice(ItemKind itemKind, float price)
+	{
 		orderContext.prices[itemKind] = (int) (price * 100);
 	}
 
+	[Given(@"a service charge of (.*)%")]
+	public void GivenServiceCharge(float percentage) {
+		orderContext.serviceCharge = percentage / 100;
+	}
+
 	[Given(@"a new order")]
-	public void GivenNewOrder(){
-		orderContext.order = new Order(orderContext.prices);
+	public void GivenNewOrder()
+	{
+		orderContext.order = new Order(orderContext.prices, orderContext.serviceCharge);
 	}
 
 	[When(@"([0-9]*) (.*) are added")]
-	public void WhenItemsAdded(int count, string item) {
+	public void WhenItemsAdded(int count, string item)
+	{
 		ItemKind itemKind;
 		
 		switch(item.ToUpper()) {
@@ -46,15 +54,4 @@ public class OrderSteps
 		int expected = (int) (total * 100);
 		Assert.Equal(expected, orderContext.order.CalculateTotal());
 	}
-/* 
-	[When(@"action")]
-	public void WhenAction(){
-		Console.WriteLine("When Some conditions");
-	}
-
-	[Then(@"testable outcome")]
-	public void ThenTestableOutcome(){
-		Console.WriteLine("Then some outcome");
-		Assert.True(true,"expected true but fund false");
-	} */
 }

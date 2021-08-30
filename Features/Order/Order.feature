@@ -2,8 +2,9 @@ Feature: Calculating the total cost of an order
 
     Background:
         Given a starter price of £4.00
-        Given a main price of £7.00
-        Given a drink price of £2.50
+        And a main price of £7.00
+        And a drink price of £2.50
+        And a service charge of 10%
 
     Scenario: Adding items to an order
         Given a new order

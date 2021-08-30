@@ -7,9 +7,11 @@ public class Order
 {
     public readonly List<ItemKind> items = new List<ItemKind>();
     readonly Dictionary<ItemKind, int> prices;
+    readonly float serviceCharge;
 
-    public Order(Dictionary<ItemKind, int> prices) {
+    public Order(Dictionary<ItemKind, int> prices, float serviceCharge) {
         this.prices = prices;
+        this.serviceCharge = serviceCharge;
     }
 
     public void AddItem(ItemKind itemKind, int count) 
@@ -28,7 +30,15 @@ public class Order
     } 
 
     public int CalculateTotal()
-    {
-        return 123;
+    {   
+        int total = 0;
+
+        foreach (ItemKind itemKind in items) {
+            total += prices[itemKind];
+        }
+
+        total += (int) (total * serviceCharge);
+
+        return total;
     }
 }
