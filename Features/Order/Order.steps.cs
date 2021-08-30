@@ -29,7 +29,7 @@ public class OrderSteps
 		orderContext.order = new Order(orderContext.prices, orderContext.serviceCharge);
 	}
 
-	[When(@"([0-9]*) (.*) are added")]
+	[When(@"([0-9]*)(?: more)? (.*) (?:is|are) added")]
 	public void WhenItemsAdded(int count, string item)
 	{
 		ItemKind itemKind;

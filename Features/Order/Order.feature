@@ -6,9 +6,16 @@ Feature: Calculating the total cost of an order
         And a drink price of £2.50
         And a service charge of 10%
 
-    Scenario: Adding items to an order
+    Scenario: Creating an order
         Given a new order
         When 4 starters are added
         And 4 mains are added
         And 4 drinks are added
         Then the total should be £59.40
+
+    Scenario: Appending items to an order
+        Given a new order
+        When 1 starter is added
+        And 2 mains are added
+        And 2 more mains are added
+        Then the total should be £35.20

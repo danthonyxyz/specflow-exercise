@@ -98,14 +98,14 @@ namespace specflow_exercise.Features.Order
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Adding items to an order")]
+        [Xunit.SkippableFactAttribute(DisplayName="Creating an order")]
         [Xunit.TraitAttribute("FeatureTitle", "Calculating the total cost of an order")]
-        [Xunit.TraitAttribute("Description", "Adding items to an order")]
-        public virtual void AddingItemsToAnOrder()
+        [Xunit.TraitAttribute("Description", "Creating an order")]
+        public virtual void CreatingAnOrder()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Adding items to an order", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Creating an order", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 9
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -143,6 +143,56 @@ namespace specflow_exercise.Features.Order
 #line hidden
 #line 14
         testRunner.Then("the total should be £59.40", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Appending items to an order")]
+        [Xunit.TraitAttribute("FeatureTitle", "Calculating the total cost of an order")]
+        [Xunit.TraitAttribute("Description", "Appending items to an order")]
+        public virtual void AppendingItemsToAnOrder()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Appending items to an order", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 16
+    this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 3
+    this.FeatureBackground();
+#line hidden
+#line 17
+        testRunner.Given("a new order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 18
+        testRunner.When("1 starter is added", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 19
+        testRunner.And("2 mains are added", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 20
+        testRunner.And("2 more mains are added", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 21
+        testRunner.Then("the total should be £35.20", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
